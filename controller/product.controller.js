@@ -2,14 +2,7 @@ import asyncHandler from "express-async-handler";
 import Product from "../models/product.model.js";
 import Category from "../models/category.model.js"
 
-// helper: review
-// export const calcAverageReview = async (product) => {
-//     if(!product.reviews || product.reviews.length === 0) return 0
-//     const sum = product.reviews.reduce((acc, cur) => acc + cur.rating, 0)
-//     return sum / product.reviews.length
-// }
 
-// >>> حط ده فوق في نفس ملف product.controller.js <<<
 
 const calcAverageReview = (product) => {
   if (!product.reviews || product.reviews.length === 0) return 0;
@@ -151,42 +144,6 @@ export const getProductsByCategory = asyncHandler(async (req , res)=>{
     count: products.length,
     data: products})
 })
-
-
-// POST /api/product/:id/review (AddReviewProduct)
-// export const addProductReview = asyncHandler(async (req , res)=>{
-//   const {id} = req.params;
-//   const {rating, comment} = req.body;
-// const userId = req.user.id;
-
-
-// const product = await Product.findById(id)
-// if(!product){
-//     return res.status(404).json({success: false, message: "Product not found"})
-// }
-
-// const existingReview = product.reviews.find(
-//     (rev) => rev.user.toString() === userId.toString()
-// )
-
-// if(existingReview){
-//     existingReview.rating = rating;
-//     existingReview.comment = comment;
-// }else{
-//     product.reviews.push({
-//         user: userId,
-//         rating,
-//         comment
-//     })
-// }
-
-//   product.review = calcAverageReview(product);
-
-//   await product.save();
-
-//   res.json({success: true, message: "Review added successfully" , data: product})
-// })
-
 
 export const addProductReview = asyncHandler(async (req, res) => {
   const { id } = req.params;
